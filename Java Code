@@ -1,0 +1,89 @@
+package com.example.scorekeeper;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.TextView;
+import android.view.View;
+import java.text.NumberFormat;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    int scoreTeamA = 0, scoreTeamB = 0;
+    int foulA=0,foulB=0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        team_a_score(scoreTeamA);
+    }
+    public void increase_a_score(View v)
+    {
+        scoreTeamA++;
+        team_a_score(scoreTeamA);
+    }
+    public void increase_a_foul(View v)
+    {
+        foulA++;
+        team_a_foul(foulA);
+    }
+    public void team_a_foul(int foulA)
+    {
+        TextView foulView=(TextView) findViewById(R.id.team_a_foul);
+        foulView.setText(String.valueOf(foulA));
+    }
+    public void team_a_score(int scoreTeamA)
+    {
+        TextView scoreView = (TextView) findViewById(R.id.team_a_score);
+        scoreView.setText(String.valueOf(scoreTeamA));
+    }
+    public void increase_b_score(View v)
+    {
+        scoreTeamB++;
+        team_b_score(scoreTeamB);
+    }
+    public void increase_b_foul(View v)
+    {
+        foulB++;
+        team_b_foul(foulB);
+    }
+    public void team_b_foul(int foulB)
+    {
+        TextView foulView=(TextView) findViewById(R.id.team_b_foul);
+        foulView.setText(String.valueOf(foulB));
+    }
+    public void team_b_score(int scoreTeamB)
+    {
+        TextView scoreView = (TextView) findViewById(R.id.team_b_score);
+        scoreView.setText(String.valueOf(scoreTeamB));
+    }
+    public void displayMessage(String s)
+    {
+        TextView text=(TextView) findViewById(R.id.displayResult);
+        text.setText(s);
+    }
+    public void reset(View v)
+    {
+        if(scoreTeamA>scoreTeamB)
+        {
+            String priceMessage="Congo A won the match by :"+(scoreTeamA-scoreTeamB)+"\ncommitting "+foulA+" fouls\nThank you for coming!";
+            displayMessage(priceMessage);
+        }
+        else if(scoreTeamB>scoreTeamA)
+        {
+            String priceMessage="Congo B won the match by :"+(scoreTeamB-scoreTeamA)+"\ncommitting "+foulB+" fouls\nThank you for coming!";
+            displayMessage(priceMessage);
+        }
+        else
+        {
+            String priceMessage="So the match ended in a tie see you all in the next game!!\nfoul by team A= "+foulA+"\nfoul by team B= "+foulB;
+            displayMessage(priceMessage);
+        }
+        foulA=0;foulB=0;
+        scoreTeamA=0;scoreTeamB=0;
+        team_a_foul(foulA);
+        team_b_foul(foulB);
+        team_a_score(scoreTeamA);
+        team_b_score(scoreTeamB);
+    }
+}
